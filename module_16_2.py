@@ -17,5 +17,7 @@ async def read_user(user_id: Annotated[int, Path(gt=0, le=100, description="Ente
     return f"Вы вошли как пользователь № {user_id}"
 
 @app.get("/user/{username}/{age}", response_class=HTMLResponse)
-async def read_user_info(username: Annotated[str, Path(min_length=5, max_length=20, description="Enter username")],age: Annotated[int, Path(ge=18, le=120, description="Enter age")]):
+async def read_user_info(
+    username: Annotated[str, Path(min_length=5, max_length=20, description="Enter username", examples={"example1": "UrbanUser"})],
+    age: Annotated[int, Path(ge=18, le=120, description="Enter age", examples={"example1": 24})]):
     return f"Информация о пользователе. Имя: {username}, Возраст: {age}"
